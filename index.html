@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRADE WITH GAUTAM</title>
+    <title>BADSHAH BROKING - ORIGINAL</title>
 
     <!-- Meta Pixel Code -->
     <script>
@@ -21,7 +21,7 @@
     </script>
     <noscript>
       <img height="1" width="1" style="display:none"
-           src="https://www.facebook.com/tr?id=1834229101272895&ev=PageView&noscript=1"/>
+           src="https://www.facebook.com/tr?id=1834229101272895&ev=PageView&noscript=1" alt=""/>
     </noscript>
 
     <style>
@@ -241,6 +241,7 @@
             margin-bottom: 10px;
             transition: all 0.3s ease;
             animation: btnGlow 2s infinite alternate;
+            cursor: pointer;
         }
 
         @keyframes btnGlow {
@@ -323,9 +324,15 @@
             background-color: rgba(0, 0, 0, 0.2);
         }
 
-        .ad-badge span {
+        .agency-link {
             color: #10b981;
             font-weight: 700;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .agency-link:hover {
+            color: #34d399;
         }
 
         /* Disclaimer Section */
@@ -370,7 +377,7 @@
         <!-- Profile Image -->
         <div class="profile-sec">
             <div class="profile-box">
-                <img src="profile.png" alt="TRADE WITH GAUTAM">
+                <img src="profile.png" alt="BADSHAH BROKING">
             </div>
         </div>
 
@@ -378,8 +385,7 @@
         <div class="sub-tag">👑 #1 Stock Trading Hub</div>
         <div class="main-name">
             BADSHAH BROKING
-
-            <span>(ORIGINAL )</span>
+            <span>(ORIGINAL)</span>
         </div>
 
         <!-- Sub Description -->
@@ -412,7 +418,7 @@
         </div>
 
         <!-- Telegram Button -->
-        <a id="telegramLink" href="https://t.me/+sgUA9UG2Y_gyYzVl" class="join-btn" onclick="trackButtonClick()">
+        <a id="telegramLink" href="javascript:void(0);" onclick="trackButtonClick()" class="join-btn">
             <div class="btn-left">
                 <div class="btn-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -436,7 +442,7 @@
 
         <!-- Agency Tag -->
         <div class="ad-badge">
-            This Channel Advertised By <span>AD ELITE MARKETING AGENCY</span>
+            This Channel Advertised By <a id="agencyLink" class="agency-link" href="javascript:void(0);" onclick="trackAgencyClick()">AD ELITE MARKETING AGENCY</a>
         </div>
 
         <!-- Disclaimer -->
@@ -453,16 +459,54 @@
 
     </div>
 
-    <!-- JavaScript - Pixel Tracking -->
+    <!-- JavaScript - Single Click Tracking Logic -->
     <script>
-        let telegramUrl = "https://t.me/+sgUA9UG2Y_gyYzVl"; 
+        var isMainClicked = false;
+        var isAgencyClicked = false;
 
-        document.getElementById("telegramLink").href = telegramUrl;
+        var mainTelegramUrl = "https://t.me/+sgUA9UG2Y_gyYzVl";
+        var agencyTelegramUrl = "https://t.me/+mp524qElHEQ2YWU1";
 
+        // Main Channel Button Handler
         function trackButtonClick() {
-            if(typeof fbq !== 'undefined') {
-                fbq('trackCustom', 'TelegramBtnClick'); 
-                fbq('track', 'Subscribe'); 
+            if (!isMainClicked) {
+                isMainClicked = true;
+
+                if (typeof fbq !== 'undefined') {
+                    fbq('trackCustom', 'TelegramBtnClick'); 
+                    fbq('track', 'Subscribe'); 
+                }
+
+                var btn = document.getElementById('telegramLink');
+                if (btn) {
+                    btn.style.pointerEvents = 'none';
+                    btn.style.opacity = '0.7';
+                }
+
+                setTimeout(function() {
+                    window.location.href = mainTelegramUrl;
+                }, 300);
+            }
+        }
+
+        // Agency Link Click Handler
+        function trackAgencyClick() {
+            if (!isAgencyClicked) {
+                isAgencyClicked = true;
+
+                if (typeof fbq !== 'undefined') {
+                    fbq('trackCustom', 'AgencyLinkClick');
+                }
+
+                var link = document.getElementById('agencyLink');
+                if (link) {
+                    link.style.pointerEvents = 'none';
+                    link.style.opacity = '0.7';
+                }
+
+                setTimeout(function() {
+                    window.location.href = agencyTelegramUrl;
+                }, 300);
             }
         }
     </script>
